@@ -11,7 +11,7 @@ use App\Http\Controllers\SiteSettingsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/user', function (Request $request) {
+Route::get('/auth/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
@@ -44,3 +44,9 @@ Route::get('/agreement/{slug}', [AgreementsController::class,'show']);
 
 #Auth
 Route::post('auth/login', [CustomAuthController::class, 'login']);
+Route::post('auth/register', [CustomAuthController::class, 'register']);
+Route::middleware('auth:sanctum')->post('/auth/logout',[CustomAuthController::class, 'logout']);
+
+//     $request->user()->currentAccessToken()->delete();
+//     return response()->json(['message' => 'Çıkış başarılı']);
+// });

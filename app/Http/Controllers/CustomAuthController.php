@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -37,6 +38,7 @@ class CustomAuthController extends Controller
                 'status' => true,
                 'message' => 'Login Successfully',
                 'token' => $token,
+                'user' => $user,
             ], 200);
         }
 
@@ -48,5 +50,40 @@ class CustomAuthController extends Controller
             //Beklenmeyen hataları yakalamak için
             return response()->json(['message' => 'An error occurred while trying to save the comment!', 'error' => $e->getMessage()], 500);
         }
+    }
+
+    public function register(Request $request){
+        try {
+            $validateRegister = Validator::make($request->all(), [
+                'name' => 'required',
+                'email' => 'required|email|unique:users,email',
+                'password' => 'required|confirmed|min:3',
+            ]);
+
+            if($validateRegister->fails()){
+                return response()->json([
+                    'status' => false,
+                    'message' => 'validation error',
+                    'errors' => $validateRegister->errors()
+                ], 422);
+            }
+
+            $user = User::create($request->all());
+                return response()->json([
+                    'status' => true,
+                    'message' => 'User created successfully',
+                ],200);
+        } catch (\Exception $e) {
+            //Beklenmeyen hataları yakalamak için
+            return response()->json(['message' => 'An error occurred while trying to save the comment!', 'error' => $e->getMessage()], 500);
+        }
+    }
+
+    public function logout(Request $request){
+        $request->user()->currentAccessToken()->delete();
+        return response()->json([
+            'status' => true,
+            'message' => 'Successfuly Logout'
+        ], 200);
     }
 }
