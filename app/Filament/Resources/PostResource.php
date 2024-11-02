@@ -118,7 +118,7 @@ class PostResource extends Resource
                             Toggle::make('is_visible')
                                 ->label('Visibility')
                                 ->helperText('Enable or disable post visibility')
-                                ->default(true)
+                                ->default(false)
                                 ->hidden(fn() => ! auth()->user()->hasRole(['super_admin']))
                                 ,
 
