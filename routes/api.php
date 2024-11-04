@@ -40,6 +40,7 @@ Route::post('/comments', [CommentController::class, 'store']);
 Route::get('/agreement', [AgreementsController::class, 'index']);
 Route::get('/agreement/{slug}', [AgreementsController::class,'show']);
 
+Route::get('/site-settings', [SiteSettingsController::class, 'index']);
 #Site Settings
 
 #Auth

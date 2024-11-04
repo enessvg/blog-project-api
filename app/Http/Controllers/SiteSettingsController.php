@@ -2,24 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\SiteSettingsResource;
 use App\Models\Kvkk;
 use App\Models\Privacy_policy;
+use App\Services\SiteSettingsService;
+use App\Traits\ApiResponserTrait;
 use Illuminate\Http\Request;
 
 class SiteSettingsController extends Controller
 {
-    // public function kvkk(){
-    //     $kvkk = Kvkk::get()->first();
-    //     return response()->json([
-    //         'kvkk' => $kvkk,
-    //     ], 200);
+    use ApiResponserTrait;
 
-    // }
+    protected $siteSettingsService;
 
-    // public function privacy_policy(){
-    //     $privacy_policy = Privacy_policy::get()->first();
-    //     return response()->json([
-    //         'privacy_policy' => $privacy_policy,
-    //     ], 200);
-    // }
+    public function __construct(SiteSettingsService $siteSettingsService)
+    {
+        $this->siteSettingsService = $siteSettingsService;
+    }
+
+    public function index(){
+        $siteSettings = $this->siteSettingsService->getAll();
+
+        return $this->successResponse([
+            'site_settings' => new SiteSettingsResource($siteSettings),
+        ], 'Successful listing of all site settings');
+    }
 }
