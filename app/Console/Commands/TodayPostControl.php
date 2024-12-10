@@ -28,7 +28,7 @@ class TodayPostControl extends Command
     {
 
         $today = now();
-            //start_date ve end_dateyi gün ile karşılaştırarak is_visibleyi ayarlıyorum.
+        //start_date ve end_dateyi gün ile karşılaştırarak is_visibleyi ayarlıyorum.
         Post::where('start_date', '<=', $today)
         ->where('end_date', '>=', $today)
         ->update(['is_visible' => 1]);
