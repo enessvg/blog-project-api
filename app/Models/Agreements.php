@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Agreements extends Model
 {
     use HasFactory;
-    protected $fillable = ['title', 'slug', 'description'];
+    protected $fillable = ['title', 'slug', 'description', 'is_visible'];
 }
