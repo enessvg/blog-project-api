@@ -8,9 +8,13 @@ use App\Models\User;
 use Filament\Support\Enums\IconPosition;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
+use BezhanSalleh\FilamentShield\Traits\HasWidgetShield;
+
 
 class AdminWidget extends BaseWidget
 {
+  	use HasWidgetShield;
+  
     protected function getStats(): array
     {
         return [

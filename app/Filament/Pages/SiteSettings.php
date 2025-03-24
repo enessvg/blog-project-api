@@ -14,11 +14,15 @@ use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
 use Filament\Support\Exceptions\Halt;
+use BezhanSalleh\FilamentShield\Traits\HasPageShield;
+
 
 
 class SiteSettings extends Page implements HasForms
 {
     use InteractsWithForms;
+  
+  	use HasPageShield;
 
     protected static ?string $navigationIcon = 'heroicon-o-cog';
 
