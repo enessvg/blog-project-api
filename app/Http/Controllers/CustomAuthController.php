@@ -58,6 +58,7 @@ class CustomAuthController extends Controller
                 'name' => 'required',
                 'email' => 'required|email|unique:users,email',
                 'password' => 'required|confirmed|min:3',
+                'ip_address' => 'required|ip',
             ]);
 
             if($validateRegister->fails()){

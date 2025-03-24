@@ -29,6 +29,7 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
         'password',
         'avatar_url',
         'profile_bio',
+        'ip_address',
     ];
 
     public function getFilamentAvatarUrl(): ?string
