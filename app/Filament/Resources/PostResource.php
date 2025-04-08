@@ -150,28 +150,34 @@ class PostResource extends Resource
         return $table
             ->columns([
                 ImageColumn::make('image')
-                ->defaultImageUrl(url('storage/default/default-image.png')),
+                ->defaultImageUrl(url('default/default-image.png')),
 
                 TextColumn::make('title')
                 ->searchable()
+              	->toggleable()
                 ->limit(30),
 
                 TextColumn::make('content')
                 ->label('Content')
-                ->limit(35),
+                ->html()
+              	->toggleable()
+                ->limit(50),
 
                 TextColumn::make('category.name')
                 ->label('Category')
                 ->sortable()
+              	->toggleable()
                 ->searchable(),
 
                 TextColumn::make('user.name')
                 ->label('Author')
                 ->sortable()
+              	->toggleable()
                 ->searchable(),
 
                 TextColumn::make('post_views')
                 ->label('View Count')
+              	->toggleable()
                 ->sortable(),
 
                 IconColumn::make('is_visible')
@@ -180,11 +186,11 @@ class PostResource extends Resource
                 ->label('Visibility')
                 ->boolean(),
 
-                TextColumn::make('start_date')->label('Start Date')->date(),
+                TextColumn::make('start_date')->label('Start Date')->date()->toggleable(),
 
-                TextColumn::make('end_date')->label('End Date')->date(),
+                TextColumn::make('end_date')->label('End Date')->date()->toggleable(),
 
-                TextColumn::make('created_at')->label('Created At')->date(),
+                TextColumn::make('created_at')->label('Created At')->date()->toggleable(),
 
             ])
             ->filters([
