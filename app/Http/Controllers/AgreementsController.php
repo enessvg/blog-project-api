@@ -22,7 +22,7 @@ class AgreementsController extends Controller
         $agreements = Agreements::where('slug', $slug)->where('is_visible', 1)->first();
 
         if (!$agreements) {
-            throw new NotFoundMessage('agreement');
+            throw new NotFoundMessage('agreement', $slug);
         }
 
         return response()->json([

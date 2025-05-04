@@ -4,6 +4,8 @@ namespace App\Filament\Pages;
 
 use Filament\Pages\Page;
 use BezhanSalleh\FilamentShield\Traits\HasPageShield;
+use Filament\Notifications\Notification;
+use Filament\Actions\Action;
 
 class LogViewer extends Page
 {
@@ -19,6 +21,11 @@ class LogViewer extends Page
 
     public function mount()
     {
+        $this->loadLog();
+    }
+
+    protected function loadLog()
+    {
         $logPath = storage_path("logs/laravel.log");
 
         if (file_exists($logPath)) {
@@ -26,5 +33,32 @@ class LogViewer extends Page
         } else {
             $this->logContent = 'Log dosyası bulunamadı.';
         }
+    }
+
+    public function clearLog()
+    {
+        $logPath = storage_path("logs/laravel.log");
+
+        if (file_exists($logPath)) {
+            file_put_contents($logPath, ''); // log dosyasını boşalt
+            $this->loadLog(); // içeriği yeniden yükle
+
+            Notification::make()
+                ->title('Log dosyası temizlendi.')
+                ->success()
+                ->send();
+        }
+    }
+
+    protected function getHeaderActions(): array
+    {
+        return [
+            Action::make('clearLog')
+                ->label('Logları Temizle')
+                ->color('danger')
+                ->action('clearLog')
+                ->requiresConfirmation()
+                ->icon('heroicon-o-trash'),
+        ];
     }
 }
