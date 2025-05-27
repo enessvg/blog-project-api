@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => [env('FRONTEND_URL'), 'http://localhost:8182'],
+    'allowed_origins' => [env('FRONTEND_URL'), 'https://bytenblade.xyz'],
 
     'allowed_origins_patterns' => [],
 
