@@ -20,6 +20,8 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Str;
+use Filament\Forms\Components\Actions\Action;
+use Filament\Forms\Set;
 
 
 class UserResource extends Resource
@@ -58,7 +60,14 @@ class UserResource extends Resource
                         TextInput::make('ip_address')
                         ->ip()
                         ->disabled()
-                        ->label('IP Address'),
+                        ->label('IP Address')
+                      	->hintAction(
+                            Action::make('goToIp')
+                          		->label('Ip adresinin nerede olduğun gör')
+                                ->icon('heroicon-m-globe-alt')
+                          		->url(fn ($state) => "https://whatismyipaddress.com/ip/{$state}")
+                                ->openUrlInNewTab(),
+                        ),
 
                     ]),
 
