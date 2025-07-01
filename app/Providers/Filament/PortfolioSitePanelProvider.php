@@ -2,7 +2,6 @@
 
 namespace App\Providers\Filament;
 
-use App\Filament\Pages\Auth\Register;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -23,27 +22,23 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Joaopaulolndev\FilamentEditProfile\FilamentEditProfilePlugin;
 use Joaopaulolndev\FilamentEditProfile\Pages\EditProfilePage;
 
-class AdminPanelProvider extends PanelProvider
+class PortfolioSitePanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
         return $panel
-            ->default()
-            ->id('dashboard')
-            ->path('dashboard')
+            ->id('portfolio-site')
+            ->path('portfolio-site')
             ->login()
-            ->spa()
             ->colors([
                 'primary' => Color::Amber,
             ])
-            ->globalSearchKeyBindings(['command+k', 'ctrl+k'])
-            ->favicon('site_settings/1000-1000.png')
-            ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
-            ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
+            ->discoverResources(in: app_path('Filament/PortfolioSite/Resources'), for: 'App\\Filament\\PortfolioSite\\Resources')
+            ->discoverPages(in: app_path('Filament/PortfolioSite/Pages'), for: 'App\\Filament\\PortfolioSite\\Pages')
             ->pages([
                 Pages\Dashboard::class,
             ])
-            ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
+            ->discoverWidgets(in: app_path('Filament/PortfolioSite/Widgets'), for: 'App\\Filament\\PortfolioSite\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,
                 Widgets\FilamentInfoWidget::class,
@@ -63,7 +58,6 @@ class AdminPanelProvider extends PanelProvider
                 Authenticate::class,
             ])
             ->plugins([
-                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
                 FilamentEditProfilePlugin::make()
                 ->slug('my-profile')
                 ->setTitle('My Profile')
@@ -76,7 +70,6 @@ class AdminPanelProvider extends PanelProvider
                 ->label(fn () => Auth::user()->name)
                 ->url(fn (): string => EditProfilePage::getUrl())
                 ->icon('heroicon-m-user-circle')
-            ])
-            ;
+            ]);
     }
 }

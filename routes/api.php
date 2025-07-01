@@ -3,6 +3,9 @@
 use App\Http\Controllers\AgreementsController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\CommentController;
+use App\Http\Controllers\Api\Portfolio\AboutController;
+use App\Http\Controllers\Api\Portfolio\BannerController;
+use App\Http\Controllers\Api\Portfolio\ProjectController;
 use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CustomAuthController;
@@ -51,3 +54,10 @@ Route::middleware('auth:sanctum')->post('/auth/logout',[CustomAuthController::cl
 //     $request->user()->currentAccessToken()->delete();
 //     return response()->json(['message' => 'Çıkış başarılı']);
 // });
+
+#Portfolio Project API
+Route::prefix('portfolio')->group(function(){
+    Route::get('/banner', [BannerController::class, 'index']);
+    Route::get('/about', [AboutController::class, 'index']);
+    Route::get('/projects', [ProjectController::class, 'index']);
+});
