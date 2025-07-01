@@ -18,6 +18,7 @@ trait ApiResponserTrait
          return response()->json([
              'status' => false,
              'message'    => $message ?? null,
+             'data'       => null,
          ], $httpResponseCode);
      }
 }

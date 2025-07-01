@@ -22,6 +22,9 @@ class BannerController extends Controller
     public function index(){
         $data = $this->service->index();
 
+        if(empty($data)) {
+            return $this->errorResponse('No banners found', 404);
+        }
         return $this->successResponse(new BannerResource($data), 'Banner retrieved successfully', 200);
     }
 }
