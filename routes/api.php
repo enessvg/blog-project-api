@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\CommentController;
 use App\Http\Controllers\Api\Portfolio\AboutController;
 use App\Http\Controllers\Api\Portfolio\BannerController;
+use App\Http\Controllers\Api\Portfolio\ContactController;
 use App\Http\Controllers\Api\Portfolio\ProjectController;
 use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\AuthController;
@@ -60,4 +61,5 @@ Route::prefix('portfolio')->group(function(){
     Route::get('/banner', [BannerController::class, 'index']);
     Route::get('/about', [AboutController::class, 'index']);
     Route::get('/projects', [ProjectController::class, 'index']);
+    Route::post('/contact', [ContactController::class, 'store']);
 });
