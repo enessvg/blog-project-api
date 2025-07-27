@@ -14,8 +14,9 @@ class AboutResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+      	$url = config('app.url');
         return [
-            'image' => env('APP_URL').'/storage/'.$this->image,
+            'image' => $url.'/storage/'.$this->image,
             'title' => $this->title,
             'description' => $this->description,
             'button_text' => $this->button_text,

@@ -14,9 +14,10 @@ class ProjectResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+      	$url = config('app.url');
         return [
             'name'  => $this->name,
-            'image' => env('APP_URL') . '/storage/' . $this->image,
+            'image' => $url . '/storage/' . $this->image,
             'button_text' => $this->button_text,
             'button_link' => $this->button_link,
         ];
